@@ -14,32 +14,28 @@
 
 ## 安装
 
-需要 Windows 和 Python 3.10 或更新版本。安装 Python 时建议勾选 “Add python.exe to PATH”。
+需要 Windows 10/11 和 Python **3.11**（推荐，本项目脚本默认按 3.11 配置；3.10 或更新版本也可以）。
 
-### 方式一：下载 ZIP（新手推荐）
+### 第 0 步：安装 Python 3.11
 
-如果你之前没用过 Git，直接下载 ZIP 最简单：
+1. 打开 <https://www.python.org/downloads/release/python-3119/>
+2. 往下滚，找到 **Windows installer (64-bit)**，下载并运行
+3. **一定要勾选底部的 “Add python.exe to PATH”**，然后点 Install Now
+4. 装完后打开终端，输入 `python --version`，能显示 `Python 3.11.x` 就说明成功
 
-1. 打开 <https://github.com/Aevella/sky-pc-mcp-companion>
-2. 点绿色 `Code`
-3. 点 `Download ZIP`
-4. 解压到桌面或任意英文路径文件夹
-5. 进入解压后的 `sky-pc-mcp-companion` 文件夹
-6. 在文件夹空白处右键，选择“在终端中打开”或“Open in Terminal”
-7. 运行：
+### 第 1 步：下载本项目代码
 
-```bat
-python -m pip install -r requirements.txt
-```
+方式一（新手推荐，不用装 Git）：
 
-如果提示 `python` 不是命令，说明 Python 没装好或没加 PATH。重新安装 Python，并勾选 “Add python.exe to PATH”。
+1. 打开 <https://github.com/sereinliovo-byte/sky-pc-mcp-companion>
+2. 点绿色 `Code` → `Download ZIP`
+3. 解压到桌面或任意英文路径文件夹
 
-### 方式二：使用 Git
+方式二（用 Git）：
 
 ```bat
-git clone https://github.com/Aevella/sky-pc-mcp-companion.git
+git clone https://github.com/sereinliovo-byte/sky-pc-mcp-companion.git
 cd sky-pc-mcp-companion
-python -m pip install -r requirements.txt
 ```
 
 如果提示：
@@ -50,7 +46,31 @@ git 不是内部或外部命令 / 无法将 "git" 识别为 cmdlet
 
 说明电脑没有安装 Git。可以改用上面的 ZIP 方式，或者安装 Git for Windows 后重新打开终端。
 
-第一次启用 PaddleOCR 时可能会下载模型，等待完成即可。
+### 第 2 步：安装依赖
+
+```bat
+python -m pip install -r requirements.txt
+```
+
+在代码文件夹空白处右键，选择“在终端中打开”或“Open in Terminal”，再运行上面的命令。
+如果提示 `python` 不是命令，说明 Python 没装好或没加 PATH。重新安装 Python，并勾选 “Add python.exe to PATH”。
+
+### 第 3 步：安装识图（OCR）工具（可选，二选一）
+
+不装也能启动，只是“读屏幕文字”功能不可用。
+
+- 方式一（推荐，中文识别效果好）：运行 `python -m pip install paddleocr paddlepaddle`，第一次启用时会自动下载识别模型（要联网，约几百 MB），等待完成即可。
+- 方式二（轻量）：先安装 Tesseract 软件（<https://github.com/UB-Mannheim/tesseract/wiki>），再运行 `python -m pip install pytesseract`。
+
+### 第 4 步：启动
+
+双击 `start-http.bat`，或命令行运行：
+
+```bat
+python sky-mcp-server.py --http --host 0.0.0.0 --port 9800 --token li12345
+```
+
+启动后连接地址：`http://127.0.0.1:9800`（手机用这台电脑的局域网 IP），Token：`li12345`。
 
 ## 启动 HTTP MCP
 

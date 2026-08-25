@@ -9,3 +9,6 @@ __pycache__/
 *.webp
 *.tmp
 .DS_Store
+
+# 备份文件不上传
+*.bak
